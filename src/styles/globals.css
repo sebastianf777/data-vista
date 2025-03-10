@@ -1,0 +1,23 @@
+// NOTE: We're using @import because Tailwind CSS 4.0 currently requires it.
+// Once Tailwind migrates to the new Sass module system (@use/@forward), we need to update accordingly.
+
+@import "tailwindcss";
+@theme {
+  --color-primary: #01122a;
+  --color-hover-primary: #2176c4;
+  --color-active: #0862C8;
+  --color-secondary: #0862C8;
+  --color-terciary: #A6A8AA;
+}
+body, option{
+  background-color: #01122a;
+  color: white;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s !important;
+  -webkit-text-fill-color: white !important;
+  background-color: var(--color-primary) !important;
+}
