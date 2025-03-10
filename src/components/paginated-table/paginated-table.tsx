@@ -2,13 +2,13 @@ import React from 'react';
 import FilterForm from '@/components/filter-form/filter-form'
 import Pagination from '@/components/pagination/pagination';
 import { filterAndPaginate, ColumnDefinition } from '@/utils/filter-and-paginate';
-import { SearchParams } from '@/types/search-params';
+import { ResolvedSearchParams } from '@/types/search-params'; // Import ResolvedSearchParams
 import OnlyTable from '@/components/only-table/only-table'
 
 type PaginatedTableProps<T> = {
     data: T[];
     allColumns: ColumnDefinition[];
-    searchParams: SearchParams;
+    searchParams: ResolvedSearchParams;
     title: string;
     baseUrl: string;
     TableComponent: React.ComponentType<{ data: T[]; columns: ColumnDefinition[] }>;
@@ -21,8 +21,6 @@ export async function PaginatedTable<T>({
                                       title,
                                       baseUrl,
                                   }: PaginatedTableProps<T>) {
-
-  const params = await Promise.resolve(searchParams);
 
     const {
         columnsToDisplay,
@@ -39,7 +37,7 @@ export async function PaginatedTable<T>({
     } = filterAndPaginate({
         data,
         allColumns,
-      searchParams: params,
+      searchParams,
     });
 
     return (

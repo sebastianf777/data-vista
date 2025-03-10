@@ -47,10 +47,89 @@ Each page features:
 
 ## Installation & Running ⚙️
 
-**Clone the repository:**
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/sebastianf777/data-vista
    cd data-vista
+   ```
 
+2. **Install dependencies:**
 
+   ```bash
+   npm install
+   or
+   yarn install
+   ```
+
+3. **Run the development server:**
+
+   ```bash
+   npm run dev
+   or
+   yarn dev
+   ```
+
+4. **Build for production:**
+
+   ```bash
+   npm run build
+   or
+   yarn build
+   ```
+
+5. **Start the production server::**
+
+   ```bash
+   npm run start
+   # or
+   yarn build
+   ```
+
+## Usage 🛠️
+
+**Navigation:**  
+Use the responsive navigation bar to move between pages (Users, Posts, Countries, Cryptos).
+
+**Filtering, Sorting, & Pagination:**  
+Each page includes a filter form to set filters, choose sort options, select which columns to display, and determine how many items to show per page. The paginated table then displays data accordingly.
+
+**Error Boundaries:**  
+Each route implements error handling via `error.tsx` and a reusable `ErrorComponent` to provide friendly fallback UI.
+
+## Error Handling 🚨
+
+- **Expected Errors:**  
+  Errors that can occur during normal operations (e.g., validation errors) are modeled as return values in server actions and managed in client components using hooks like `useActionState`.
+
+- **Uncaught Exceptions:**  
+  Unexpected errors in Server Components bubble up to the nearest error boundary (`error.tsx`), with a root-level error boundary available as `global-error.tsx`.
+
+- **Reusable Error Component:**  
+  The `ErrorComponent` is used across the application to provide a consistent error UI.
+
+## Technologies 🛡️
+
+- **Next.js 13** with the App Router
+- **TypeScript** for type safety and maintainability
+- **Tailwind CSS** for responsive styling
+- **Sass** (optional) for advanced CSS if needed
+- **ESLint & Prettier** for code quality and consistency
+
+## Contributing 🤝
+
+Contributions are welcome! Follow these steps:
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Submit a pull request describing your changes.
+
+For bug reports or feature suggestions, please open an issue on GitHub.
+
+## License 📄
+
+This project is licensed under the MIT License. You’re free to use, modify, and distribute the code as per the terms of the license.
+
+## Live Demo 🌐
+
+Experience Data Vista in action – [**View It Live**](https://data-vista-6gg5sq8y2-sebastians-projects-954f26cb.vercel.app/)

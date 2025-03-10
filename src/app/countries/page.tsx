@@ -1,10 +1,13 @@
 import { getCountries, Country } from '@/services/countries.service';
-import { SearchParams } from '@/types/search-params';
+import { SearchParams, resolveSearchParams, ResolvedSearchParams } from '@/types/search-params';
 import { ColumnDefinition } from '@/utils/filter-and-paginate';
 import { PaginatedTable } from '@/components/paginated-table/paginated-table';
 import OnlyTable from "@/components/only-table/only-table";
 
+
+
 export default async function CountriesPage({ searchParams }: { searchParams: SearchParams }) {
+    const params: ResolvedSearchParams = await resolveSearchParams(searchParams);
     const data: Country[] = await getCountries();
 
     const allColumns: ColumnDefinition[] = [
@@ -23,7 +26,7 @@ export default async function CountriesPage({ searchParams }: { searchParams: Se
         <PaginatedTable<Country>
             data={data}
             allColumns={allColumns}
-            searchParams={searchParams}
+            searchParams={params}
             title={"Countries API"}
             baseUrl={"/countries"}
             TableComponent={OnlyTable}

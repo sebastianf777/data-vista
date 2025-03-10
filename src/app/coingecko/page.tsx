@@ -1,10 +1,12 @@
 import { getCoins, RootObject } from '@/services/gecko.service';
-import { SearchParams } from '@/types/search-params';
+import { SearchParams, resolveSearchParams, ResolvedSearchParams } from '@/types/search-params';
 import { ColumnDefinition } from '@/utils/filter-and-paginate';
 import { PaginatedTable } from '@/components/paginated-table/paginated-table';
 import OnlyTable from '@/components/only-table/only-table';
 
-export default async function CoinGeckoPage({ searchParams }: { searchParams: SearchParams }) {
+
+export default async function CoinGeckoPage({ searchParams }: { searchParams: SearchParams}) {
+    const params: ResolvedSearchParams = await resolveSearchParams(searchParams);
     const data: RootObject[] = await getCoins();
 
     const allColumns: ColumnDefinition[] = [
@@ -20,7 +22,7 @@ export default async function CoinGeckoPage({ searchParams }: { searchParams: Se
         <PaginatedTable<RootObject>
             data={data}
             allColumns={allColumns}
-            searchParams={searchParams}
+            searchParams={params}
             title={'CoinGecko API'}
             baseUrl={'/coingecko'}
             TableComponent={OnlyTable}

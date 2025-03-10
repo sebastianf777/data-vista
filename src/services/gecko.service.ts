@@ -1,6 +1,10 @@
 // Not all the types are used, but are available if
 // it is asked in case we need to work with absolutely all of them
-
+export interface Roi {
+    times: number;
+    currency: string;
+    percentage: number;
+}
 export interface RootObject {
     id: string;
     symbol: string;
@@ -26,7 +30,7 @@ export interface RootObject {
     atl: number;
     atl_change_percentage: number;
     atl_date: string;
-    roi?: any;
+    roi?:  Roi | null;
     last_updated: string;
 }
 

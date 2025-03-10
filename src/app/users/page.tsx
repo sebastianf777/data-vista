@@ -1,13 +1,12 @@
 import { getUsers, User } from '@/services/user.service';
-import { SearchParams } from '@/types/search-params';
+import { SearchParams, resolveSearchParams, ResolvedSearchParams } from '@/types/search-params';
 import { ColumnDefinition } from '@/utils/filter-and-paginate';
 import { PaginatedTable } from '@/components/paginated-table/paginated-table';
 import OnlyTable from "@/components/only-table/only-table";
 
-type UsersPageProps = { searchParams: SearchParams }
 
-export default async function UsersPage({ searchParams }: UsersPageProps) {
-
+export default async function UsersPage({ searchParams }: { searchParams: SearchParams}) {
+    const params: ResolvedSearchParams = await resolveSearchParams(searchParams);
 
     const data: User[] = await getUsers();
 
@@ -32,7 +31,7 @@ export default async function UsersPage({ searchParams }: UsersPageProps) {
         <PaginatedTable<User>
             data={data}
             allColumns={allColumns}
-            searchParams={searchParams}
+            searchParams={params}
             title={"Users"}
             baseUrl={"/users"}
             TableComponent={OnlyTable}
