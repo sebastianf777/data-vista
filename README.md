@@ -50,7 +50,7 @@ Each page features:
 **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/data-vista.git
+   git clone https://github.com/sebastianf777/data-vista
    cd data-vista
 
 
