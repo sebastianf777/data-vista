@@ -4,20 +4,6 @@ Data Vista is a Next.js 13 project built with TypeScript and Tailwind CSS that f
 
 ---
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation & Running](#installation--running)
-- [Usage](#usage)
-- [Error Handling](#error-handling)
-- [Technologies](#technologies)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
 ## Overview 🔍
 
 Data Vista is designed to be a showcase of best practices in modern full‑stack development using Next.js with the App Router. It provides a set of pages that consume public APIs such as:
@@ -58,61 +44,10 @@ Each page features:
 
 ---
 
-## Project Structure 🗂️
-
-Below is a simplified view of the folder layout:
-
-data-vista/
-├── public/
-│   └── logo.png
-├── src/
-│   ├── app/
-│   │   ├── coingecko/
-│   │   │   ├── error.tsx        // Cryptos page error boundary
-│   │   │   └── page.tsx         // Cryptos page using filtering, sorting & pagination
-│   │   ├── countries/
-│   │   │   ├── error.tsx        // Countries page error boundary
-│   │   │   └── page.tsx         // Countries page using filtering, sorting & pagination
-│   │   ├── posts/
-│   │   │   ├── error.tsx        // Posts page error boundary
-│   │   │   └── page.tsx         // Posts page using filtering, sorting & pagination
-│   │   ├── users/
-│   │   │   ├── error.tsx        // Users page error boundary
-│   │   │   └── page.tsx         // Users page using filtering, sorting & pagination
-│   │   └── global-error.tsx     // (optional) Root error boundary
-│   ├── components/
-│   │   ├── error-component/
-│   │   │   └── error-component.tsx  // Reusable error component
-│   │   ├── filter-form/
-│   │   │   └── filter-form.tsx      // Reusable filter form component
-│   │   ├── navbar/
-│   │   │   └── navbar.tsx           // Responsive navigation bar component
-│   │   ├── only-table/
-│   │   │   └── only-table.tsx       // Alternative table component
-│   │   ├── paginated-table/
-│   │   │   └── paginated-table.tsx  // Reusable table with pagination
-│   │   ├── pagination/
-│   │   │   └── pagination.tsx       // Pagination component
-│   │   ├── search-bar/
-│   │   │   └── search-bar.tsx       // Search bar component
-│   │   └── truncated-text/
-│   │       └── truncated-text.tsx   // (Optional) Truncated text component
-│   ├── services/
-│   │   ├── countries.service.ts     // Countries API service with caching and preprocessing
-│   │   ├── gecko.service.ts         // Cryptocurrencies API service
-│   │   ├── post.service.ts          // Posts API service
-│   │   └── user.service.ts          // Users API service
-│   ├── styles/
-│   │   └── globals.css              // Global styles, Tailwind CSS and theme configuration
-│   ├── types/
-│   │   └── search-params.tsx        // Shared type for search parameters
-│   └── utils/
-│       └── filter-and-paginate.tsx  // Utility for filtering, sorting and pagination
-├── -config-files
 
 ## Installation & Running ⚙️
 
-1. **Clone the repository:**
+**Clone the repository:**
 
    ```bash
    git clone https://github.com/yourusername/data-vista.git
