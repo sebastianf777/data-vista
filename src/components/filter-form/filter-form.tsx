@@ -1,5 +1,5 @@
-import SearchBar from '@/app/components/search-bar/search-bar';
-import { ColumnDefinition } from '@/app/utils/filter-and-paginate';
+import SearchBar from '@/components/search-bar/search-bar';
+import { ColumnDefinition } from '@/utils/filter-and-paginate';
 
 export type FilterFormProps = {
     allColumns: ColumnDefinition[];
@@ -22,70 +22,75 @@ export default function FilterForm({
                                    }: FilterFormProps) {
     return (
         <form method={"get"} className={"mb-4 flex flex-col gap-4"}>
-            <div className={"flex gap-4 items-end"}>
-                <div>
-                    <label htmlFor={"filterColumn"} className={"block font-semibold mb-1"}>
-                        Filter Column:
-                    </label>
-                    <select
-                        id={"filterColumn"}
-                        name={"filterColumn"}
-                        defaultValue={filterColumn}
-                        className={"border border-gray-300 rounded p-2"}
-                    >
-                        <option value={"all"}>(All)</option>
-                        {allColumns.map((col) => (
-                            <option key={col.key} value={col.key}>
-                                {col.header}
-                            </option>
-                        ))}
-                    </select>
+            <div className={"flex gap-4 items-end flex-wrap"}>
+                <div className="flex flex-col sm:flex-row  gap-4 ">
+                    <div>
+                        <label htmlFor={'filterColumn'} className={'block font-semibold mb-1'}>
+                            Filter Column:
+                        </label>
+                        <select
+                          id={'filterColumn'}
+                          name={'filterColumn'}
+                          defaultValue={filterColumn}
+                          className={'border border-gray-300 rounded p-2'}
+                        >
+                            <option value={'all'}>(All)</option>
+                            {allColumns.map((col) => (
+                              <option key={col.key} value={col.key}>
+                                  {col.header}
+                              </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor={'filterValue'} className={'block font-semibold mb-1'}>
+                            Filter Value:
+                        </label>
+                        <SearchBar
+                          defaultValue={filterValue}
+                          name={'filterValue'}
+                          placeholder={'Enter search term...'}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor={"filterValue"} className={"block font-semibold mb-1"}>
-                        Filter Value:
-                    </label>
-                    <SearchBar
-                        defaultValue={filterValue}
-                        name={"filterValue"}
-                        placeholder={"Enter search term..."}
-                    />
-                </div>
-                <div>
-                    <label htmlFor={"sortColumn"} className={"block font-semibold mb-1"}>
+                <div className={"flex flex-col sm:flex-row  gap-4 "}>
+                    <div>
+                        <label htmlFor={'sortColumn'} className={'block font-semibold mb-1'}>
                         Sort Column:
-                    </label>
-                    <select
-                        id={"sortColumn"}
-                        name={"sortColumn"}
-                        defaultValue={sortColumn}
-                        className={"border border-gray-300 rounded p-2"}
-                    >
-                        <option value={"none"}>(None)</option>
-                        {allColumns.map((col) => (
-                            <option key={col.key} value={col.key}>
-                                {col.header}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor={"sortOrder"} className={"block font-semibold mb-1"}>
+                        </label>
+                        <select
+                          id={'sortColumn'}
+                          name={'sortColumn'}
+                          defaultValue={sortColumn}
+                          className={'border border-gray-300 rounded p-2'}
+                        >
+                            <option value={'none'}>(None)</option>
+                            {allColumns.map((col) => (
+                              <option key={col.key} value={col.key}>
+                                  {col.header}
+                              </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor={'sortOrder'} className={'block font-semibold mb-1'}>
                         Sort Order:
                     </label>
-                    <select
-                        id={"sortOrder"}
-                        name={"sortOrder"}
-                        defaultValue={sortOrder}
-                        className={"border border-gray-300 rounded p-2"}
-                    >
-                        <option value={"asc"}>Ascending</option>
-                        <option value={"desc"}>Descending</option>
-                    </select>
+
+                        <select
+                          id={'sortOrder'}
+                          name={'sortOrder'}
+                          defaultValue={sortOrder}
+                          className={'border border-gray-300 rounded p-2'}
+                        >
+                            <option value={'asc'}>Ascending</option>
+                            <option value={'desc'}>Descending</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div className={"flex gap-4 items-end"}>
+            <div className={"flex gap-4 items-end justify-between flex-wrap"}>
                 <div className={"flex flex-col gap-2"}>
                     <span className={"font-semibold"}>Display Columns:</span>
                     <div className={"flex gap-4 flex-wrap"}>
@@ -98,15 +103,15 @@ export default function FilterForm({
                                     defaultChecked={
                                         selectedColumns.length > 0 ? selectedColumns.includes(col.key) : true
                                     }
-                                    className={"border border-gray-300 rounded"}
+                                    className={"border border-gray-300 rounded "}
                                 />
                                 {col.header}
                             </label>
                         ))}
                     </div>
                 </div>
-                <div>
-                    <label htmlFor={"itemsPerPage"} className={"block font-semibold mb-1"}>
+                <div className={"flex flew-col items-center"}>
+                    <label htmlFor={"itemsPerPage"} className={"block font-semibold mb-1 mr-2"}>
                         Items Per Page:
                     </label>
                     <select
@@ -120,9 +125,11 @@ export default function FilterForm({
                         <option value={"15"}>15</option>
                         <option value={"20"}>20</option>
                     </select>
-                </div>
 
-                <button type={"submit"} className={"p-2 bg-blue-500 text-white rounded"}>
+
+
+                </div>
+                <button type={"submit"} className={"p-2 bg-terciary hover:bg-secondary text-white rounded  cursor-pointer "}>
                     Apply Filters
                 </button>
             </div>

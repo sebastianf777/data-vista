@@ -33,7 +33,8 @@ export async function getUsers(): Promise<User[]> {
     if (!res.ok) {
         throw new Error('Error al obtener los usuarios');
     }
-    const data = (await res.json()) as User[];
+
+    const data: User[] = (await res.json()) as User[];
 
     return data.map((user) => {
         const { lat, lng } = user.address.geo;
@@ -45,5 +46,4 @@ export async function getUsers(): Promise<User[]> {
             },
         };
     });
-
 }

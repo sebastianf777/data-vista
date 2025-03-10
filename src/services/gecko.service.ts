@@ -1,4 +1,3 @@
-// File: app/services/gecko.service.ts
 
 export interface RootObject {
     id: string;
@@ -30,13 +29,13 @@ export interface RootObject {
 }
 
 export async function getCoins(): Promise<RootObject[]> {
-    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd';
-    const res = await fetch(url);
+
+    const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd');
 
     if (!res.ok) {
         throw new Error('Failed to fetch data from CoinGecko');
     }
 
-    const data: RootObject[] = await res.json();
-    return data;
+    const data = await res.json();
+    return data as RootObject[] ;
 }

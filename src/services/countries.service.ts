@@ -13,176 +13,24 @@ export interface Name {
     nativeName: NativeName;
 }
 
-export interface SHP {
+export type CurrencyValue = {
     name: string;
     symbol: string;
-}
-
-export interface Currency {
-    sHP: SHP;
-}
+};
+export type Currencies = Record<string, CurrencyValue>;
 
 export interface Idd {
     root: string;
     suffixes: string[];
 }
 
-export interface Language {
-    eng: string;
-}
+export type Languages = Record<string, string>;
 
-export interface Ara {
+export type TranslationValue = {
     official: string;
     common: string;
-}
-
-export interface Bre {
-    official: string;
-    common: string;
-}
-
-export interface Ce {
-    official: string;
-    common: string;
-}
-
-export interface Cym {
-    official: string;
-    common: string;
-}
-
-export interface Deu {
-    official: string;
-    common: string;
-}
-
-export interface Est {
-    official: string;
-    common: string;
-}
-
-export interface Fin {
-    official: string;
-    common: string;
-}
-
-export interface Fra {
-    official: string;
-    common: string;
-}
-
-export interface Hrv {
-    official: string;
-    common: string;
-}
-
-export interface Hun {
-    official: string;
-    common: string;
-}
-
-export interface Ita {
-    official: string;
-    common: string;
-}
-
-export interface Jpn {
-    official: string;
-    common: string;
-}
-
-export interface Kor {
-    official: string;
-    common: string;
-}
-
-export interface Nld {
-    official: string;
-    common: string;
-}
-
-export interface Per {
-    official: string;
-    common: string;
-}
-
-export interface Pol {
-    official: string;
-    common: string;
-}
-
-export interface Por {
-    official: string;
-    common: string;
-}
-
-export interface Ru {
-    official: string;
-    common: string;
-}
-
-export interface Slk {
-    official: string;
-    common: string;
-}
-
-export interface Spa {
-    official: string;
-    common: string;
-}
-
-export interface Srp {
-    official: string;
-    common: string;
-}
-
-export interface Swe {
-    official: string;
-    common: string;
-}
-
-export interface Tur {
-    official: string;
-    common: string;
-}
-
-export interface Urd {
-    official: string;
-    common: string;
-}
-
-export interface Zho {
-    official: string;
-    common: string;
-}
-
-export interface Translation {
-    ara: Ara;
-    bre: Bre;
-    ces: Ce;
-    cym: Cym;
-    deu: Deu;
-    est: Est;
-    fin: Fin;
-    fra: Fra;
-    hrv: Hrv;
-    hun: Hun;
-    ita: Ita;
-    jpn: Jpn;
-    kor: Kor;
-    nld: Nld;
-    per: Per;
-    pol: Pol;
-    por: Por;
-    rus: Ru;
-    slk: Slk;
-    spa: Spa;
-    srp: Srp;
-    swe: Swe;
-    tur: Tur;
-    urd: Urd;
-    zho: Zho;
-}
+};
+export type Translations = Record<string, TranslationValue>;
 
 export interface EngDemonym {
     f: string;
@@ -209,7 +57,8 @@ export interface Flag {
 }
 
 export interface CoatOfArms {
-    // This interface is empty because the API might return empty objects.
+    png?: string;
+    svg?: string;
 }
 
 export interface CapitalInfo {
@@ -225,13 +74,13 @@ export interface Country {
     independent: boolean;
     status: string;
     unMember: boolean;
-    currencies: Currency;
+    currencies: Currencies;
     idd: Idd;
     capital: string[];
     altSpellings: string[];
     region: string;
-    languages: Language;
-    translations: Translation;
+    languages: Languages;
+    translations: Translations;
     latlng: number[];
     landlocked: boolean;
     area: number;
@@ -252,52 +101,37 @@ export interface Country {
     };
 }
 
-function sleep(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export async function getCountries(): Promise<Country[]> {
-    const url = 'https://restcountries.com/v3.1/all';
-    const maxAttempts = 3;
-    let attempts = 0;
-    let res: Response | null = null;
+    const res = await fetch ('https://restcountries.com/v3.1/all');
 
-    while (attempts < maxAttempts) {
-        try {
-            res = await fetch(url);
-            if (res.ok) break;
-        } catch (error) {
-            console.error(`Attempt ${attempts + 1} failed:`, error);
-        }
-        attempts++;
-        await sleep(1000); // Wait 1 second before retrying
-    }
 
-    if (!res || !res.ok) {
-        throw new Error('Error fetching countries after multiple attempts');
+    if (!res.ok) {
+        throw new Error('Error fetching countries');
     }
 
     const data = (await res.json()) as Country[];
 
-    // Preprocess the data: add summary fields for capital and languages,
-    // and merge native names into one summary string.
+
     return data.map((country) => {
         const capitalSummary = country.capital ? country.capital.join(', ') : '';
         const languagesSummary = country.languages ? Object.values(country.languages).join(', ') : '';
         const nativeNamesSummary = country.name.nativeName
-            ? Object.values(country.name.nativeName)
-                .map((n) => n.common)
-                .join(', ')
-            : '';
+          ? Object.values(country.name.nativeName)
+            .map(nativeObj => nativeObj.common)
+            .join(', ')
+          : '';
 
+        const translationsNamesSummary = country.translations
+          ? Object.entries(country.translations)
+            .map(([lang, translation]) => `${lang}: ${translation.official}`)
+            .join('\n')
+          : '';
         return {
             ...country,
-            name: {
-                ...country.name,
-                nativeNamesSummary,
-            },
+            nativeNamesSummary,
             capitalSummary,
             languagesSummary,
+            translationsNamesSummary,
         };
     });
 }

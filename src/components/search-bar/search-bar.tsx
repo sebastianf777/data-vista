@@ -11,7 +11,7 @@ const SearchBar = ({ defaultValue, name, placeholder  }:SearchBarProps) => {
             defaultValue={defaultValue}
             name={name}
             placeholder={placeholder}
-            className={"border border-gray-300 rounded p-2"}
+            className={"border border-gray-300 rounded p-2 autofill:bg-yellow-200"}
         />
     );
 };

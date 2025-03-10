@@ -1,6 +1,7 @@
 export type ColumnDefinition = {
     key: string;
     header: string;
+    isImage?: boolean;
 };
 
 export type FilterAndPaginateParams<T> = {
@@ -60,7 +61,6 @@ export function filterAndPaginate<T>({
             ? allColumns.filter((col) => selectedColumns.includes(col.key))
             : allColumns;
 
-    // Filtering
     let filteredData = data;
     if (filterValue) {
         if (filterColumn !== 'all') {
@@ -78,12 +78,10 @@ export function filterAndPaginate<T>({
         }
     }
 
-    // Sorting
     if (sortColumn !== 'none') {
         filteredData.sort((a, b) => {
             const aVal = getValueByKey(a, sortColumn);
             const bVal = getValueByKey(b, sortColumn);
-            // For simplicity, we convert to string for comparison.
             const aStr = String(aVal).toLowerCase();
             const bStr = String(bVal).toLowerCase();
             if (aStr < bStr) return sortOrder === 'asc' ? -1 : 1;
@@ -92,7 +90,6 @@ export function filterAndPaginate<T>({
         });
     }
 
-    // Pagination
     const totalItems = filteredData.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;

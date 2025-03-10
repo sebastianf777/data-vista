@@ -1,10 +1,10 @@
 import React from 'react';
-import FilterForm from '@/app/components/filter-form/filter-form'
-import Pagination from '@/app/components/pagination/pagination';
-import { filterAndPaginate, ColumnDefinition } from '@/app/utils/filter-and-paginate';
-import { SearchParams } from '@/app/types/search-params';
+import FilterForm from '@/components/filter-form/filter-form'
+import Pagination from '@/components/pagination/pagination';
+import { filterAndPaginate, ColumnDefinition } from '@/utils/filter-and-paginate';
+import { SearchParams } from '@/types/search-params';
+import OnlyTable from '@/components/only-table/only-table'
 
-// TODO | Estudiar que es la T porque si esta te lo van a preguntar
 type PaginatedTableProps<T> = {
     data: T[];
     allColumns: ColumnDefinition[];
@@ -14,14 +14,16 @@ type PaginatedTableProps<T> = {
     TableComponent: React.ComponentType<{ data: T[]; columns: ColumnDefinition[] }>;
 }
 
-export function PaginatedTable<T>({
+export async function PaginatedTable<T>({
                                       data,
                                       allColumns,
                                       searchParams,
                                       title,
                                       baseUrl,
-                                      TableComponent,
                                   }: PaginatedTableProps<T>) {
+
+  const params = await Promise.resolve(searchParams);
+
     const {
         columnsToDisplay,
         currentItems,
@@ -37,11 +39,11 @@ export function PaginatedTable<T>({
     } = filterAndPaginate({
         data,
         allColumns,
-        searchParams,
+      searchParams: params,
     });
 
     return (
-        <div className={"container mx-auto mt-20 p-4"}>
+        <div className={"mt-26 px-11 lg:px-16 pb-10"}>
             <h1 className={"text-2xl font-bold mb-4"}>{title}</h1>
 
             <FilterForm
@@ -54,7 +56,7 @@ export function PaginatedTable<T>({
                 sortOrder={sortOrder}
             />
 
-            <TableComponent data={currentItems} columns={columnsToDisplay} />
+            <OnlyTable data={currentItems} columns={columnsToDisplay} />
 
             <Pagination
                 currentPage={currentPage}

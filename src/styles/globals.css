@@ -1,6 +1,3 @@
-// NOTE: We're using @import because Tailwind CSS 4.0 currently requires it.
-// Once Tailwind migrates to the new Sass module system (@use/@forward), we need to update accordingly.
-
 @import "tailwindcss";
 @theme {
   --color-primary: #01122a;
