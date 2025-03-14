@@ -132,4 +132,4 @@ This project is licensed under the MIT License. You’re free to use, modify, an
 
 ## Live Demo 🌐
 
-Experience Data Vista in action – [**View It Live**](https://data-vista-6gg5sq8y2-sebastians-projects-954f26cb.vercel.app/)
+Experience Data Vista in action – [**View It Live**](https://data-vista-sebastianf777-sebastians-projects-954f26cb.vercel.app)
