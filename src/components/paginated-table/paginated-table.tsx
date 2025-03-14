@@ -2,7 +2,7 @@ import React from 'react';
 import FilterForm from '@/components/filter-form/filter-form'
 import Pagination from '@/components/pagination/pagination';
 import { filterAndPaginate, ColumnDefinition } from '@/utils/filter-and-paginate';
-import { ResolvedSearchParams } from '@/types/search-params'; // Import ResolvedSearchParams
+import { ResolvedSearchParams } from '@/types/search-params';
 import OnlyTable from '@/components/only-table/only-table'
 
 type PaginatedTableProps<T> = {
