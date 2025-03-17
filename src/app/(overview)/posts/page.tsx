@@ -3,6 +3,11 @@ import { ColumnDefinition } from '@/utils/filter-and-paginate';
 import { SearchParams, resolveSearchParams, ResolvedSearchParams } from '@/types/search-params';
 import { PaginatedTable } from '@/components/paginated-table/paginated-table';
 import OnlyTable from '@/components/only-table/only-table';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Posts API',
+};
 
 
 export default async function PostsPage({ searchParams }: { searchParams: SearchParams}) {
