@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: 'Data Vista Project',
   },
   description: 'Data Vista Project Exercise made with NextJS by Sebastian Fontana',
-  metadataBase: new URL('data-vista-ochre.vercel.app'),
+  metadataBase: new URL('https://data-vista-ochre.vercel.app'),
 };
 const montserrat = Montserrat({
     subsets: ['latin'],
