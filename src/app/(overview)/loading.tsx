@@ -1,6 +1,4 @@
-// app/countries/loading.tsx
 export default function Loading() {
-  // Assume the table has 9 columns and we want 5 skeleton rows
   const columnsCount = 4;
   const rowsCount = 5;
   const columns = Array.from({ length: columnsCount }, (_, i) => i);
